@@ -19,19 +19,12 @@ config({
 });
 
 client.on("ready", () => {
-    console.log(`Hi, ${client.user.username} is now online!`);
+    console.log(`Bot online.`);
 
-    client.user.setPresence({
-        status: "online",
-        game: {
-            name: "me getting developed",
-            type: "WATCHING"
-        }
-    }); 
 })
 
 client.on("message", async message => {
-    const prefix = "_";
+    const prefix = ";";
 
     if (message.author.bot) return;
     if (!message.guild) return;
@@ -40,7 +33,7 @@ client.on("message", async message => {
     // If message.member is uncached, cache it.
     if (!message.member) message.member = await message.guild.fetchMember(message);
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).split(' ');
     const cmd = args.shift().toLowerCase();
     
     if (cmd.length === 0) return;
